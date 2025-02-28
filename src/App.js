@@ -4,6 +4,7 @@ import './App.css';
 import GetData from './Components/GetData';
 import PostData from './Components/PostData';
 import InputBox from './Components/InputBox';
+import FactChecker from './Components/FactChecker';
 
 import React, {Suspense, useState} from 'react';
 
@@ -53,32 +54,14 @@ function UploadInfo({onGoHome}) {
   // This page has index 1
   return (
     <div className="App">
-      <h1>Upload your files here</h1>
-
-      <div style={styles.container}>
-        <button style={styles.button} onClick={onGoHome}>Back Home</button>
-      </div>
+      <br></br>
+      <h1>
+      <img src="logo192.png" alt="Truthflow Logo" width="40" height="40"></img>
+        Truthflow</h1>
+      <FactChecker />
     </div>
   )
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    padding: "10px",
-  },
-  button: {
-    fontSize: "50px",
-    padding: "10px 10px",
-    backgroundColor: "yellow",
-    color: "black",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-  },
-};
 
 function saveTextToFile(text, filename = "extracted_text.txt") {
   const blob = new Blob([text], { type: "text/plain" });
