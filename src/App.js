@@ -31,9 +31,9 @@ function HomePage({setClick}) {
       <div className="App">
           <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>
-              Welcome to <code>XXX</code>.
-          </h1>
+          <h2>
+              Welcome to <code>Truthflow</code>.
+          </h2>
           <p>How can we help you today.</p>
 
           <Suspense fallback={<p>Loading...</p>}>
@@ -67,11 +67,11 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     gap: "20px",
-    padding: "20px",
+    padding: "10px",
   },
   button: {
-    fontSize: "24px",
-    padding: "20px 40px",
+    fontSize: "50px",
+    padding: "10px 10px",
     backgroundColor: "yellow",
     color: "black",
     border: "none",
