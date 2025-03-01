@@ -41,6 +41,16 @@ function InputBox({ setClick, setURL }) {
     fileInputRef.current.click();
   };
 
+  const handleKeyDown = (event) => {
+    // Check if the pressed key is Enter and the input is not empty
+    if (event.key === 'Enter' && !event.shiftKey && inputValue.trim()) {
+      // Prevent the default action (new line in textarea)
+      event.preventDefault();
+      // Trigger the submit function
+      handleOnSubmit();
+    }
+  };
+
   return (
     <div style={{ 
       position: 'relative', 
@@ -60,6 +70,7 @@ function InputBox({ setClick, setURL }) {
         <textarea
           value={inputValue}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           placeholder="Insert Your URL..."
           style={{
             width: '100%',
@@ -85,7 +96,7 @@ function InputBox({ setClick, setURL }) {
           right: '12px',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px'
+          gap: '8px'
         }}>
           {/* Hidden file input */}
           <input 
