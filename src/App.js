@@ -47,9 +47,9 @@ function HomePage({setClick, setURL}) {
           <h2>
               Welcome to <code>Truthflow</code>.
           </h2>
-          <br></br>
-          <p>A service for identifying fake content and news on social media.</p>
-          <p> Paste URL or Upload photo of the media post/article </p>
+          <p>How can we help you today.</p>
+          <p>A service for identifying fake content and news on social media</p>
+          <p> Paste URL or Upload PDF of the news post/article </p>
               
           <InputBox 
             setClick={ setClick }
