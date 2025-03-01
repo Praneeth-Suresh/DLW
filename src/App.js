@@ -6,7 +6,7 @@ import PostData from './Components/PostData';
 import InputBox from './Components/InputBox';
 import FactChecker from './Components/FactChecker';
 
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useState, useEffect} from 'react';
 
 function App() {
   const [click, setClick] = useState(0);
@@ -27,7 +27,14 @@ function App() {
 }
 
 function HomePage({setClick}) {
-  // This page has index 0
+  
+  const scrolldown = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
       <div className="App">
           <header className="App-header">
@@ -44,7 +51,10 @@ function HomePage({setClick}) {
           <InputBox 
             setClick={ setClick }
           />
+          
+        
 
+        <i class="arrow down" onClick={scrolldown}></i>
           </header>
       </div>
     );
@@ -56,7 +66,7 @@ function UploadInfo({onGoHome}) {
     <div className="App">
       <br></br>
       <h1>
-      <img src="logo192.png" alt="Truthflow Logo" width="40" height="40"></img>
+      <img src={logo} alt="Truthflow Logo" width="72" height="72"></img>
         Truthflow</h1>
       <FactChecker />
     </div>
