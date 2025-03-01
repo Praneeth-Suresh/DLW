@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function GetData() {
+function GetData(input_data) {
     const url = 'http://127.0.0.1:8000/Advisor/';
 
     const [data, setData] = useState('');
@@ -9,7 +9,7 @@ function GetData() {
     useEffect(() => {
     axios.get(url,{
         params: {
-            User: "Praneeth"
+            URL: input_data
         }
     }) // Django
         .then(response => {
@@ -22,9 +22,7 @@ function GetData() {
 
     console.log("Here is what I got : " + data);
 
-    return (
-        <p>Btw look what I fetched: {data}</p>
-    )
-}
+    return { data }
+};
 
 export default GetData;

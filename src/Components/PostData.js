@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-function PostData() {
+function PostData( url ) {
+
+    console.log("Post: ", url);
+
     const request = {
       "User": "Praneeth",
-      "Text": "To build Reprose, we need to research our target marekt,"
+      "URL": url,
     }
 
     console.log("Creating POST to Django")

@@ -1,8 +1,6 @@
 import logo from './logo.png';
 import './App.css';
 
-import GetData from './Components/GetData';
-import PostData from './Components/PostData';
 import InputBox from './Components/InputBox';
 import FactChecker from './Components/FactChecker';
 
@@ -10,24 +8,31 @@ import React, {Suspense, useState, useEffect} from 'react';
 
 function App() {
   const [click, setClick] = useState(0);
+  const [URL, setURL] = useState("");
+
+  console.log("URL:", URL, " click: ", click)
 
   if (click === 0) {
     return (
       <HomePage 
         setClick={() => setClick(1)}
+        setURL={(url) => setURL(url)}
       />
     );
   } else {
     return (
       <UploadInfo
         onGoHome={() => setClick(0)}
+        URL={ URL }
       />
     );
   } 
 }
 
-function HomePage({setClick}) {
-  
+function HomePage({setClick, setURL}) {
+  // This page has index 0
+
+    
   const scrolldown = () => {
     window.scrollTo({
       top: window.innerHeight,
@@ -42,15 +47,13 @@ function HomePage({setClick}) {
           <h2>
               Welcome to <code>Truthflow</code>.
           </h2>
+          <p>How can we help you today.</p>
           <p>A service for identifying fake content and news on social media (insta for now)</p>
           <p> Paste URL or Upload PDF of the news post/article </p>
-
-          <Suspense fallback={<p>Loading...</p>}>
-              <GetData />
-          </Suspense>
               
           <InputBox 
             setClick={ setClick }
+            setURL={ setURL }
           />
           
         
@@ -61,7 +64,7 @@ function HomePage({setClick}) {
     );
 }
 
-function UploadInfo({onGoHome}) {
+function UploadInfo({onGoHome, URL}) {
   // This page has index 1
   return (
     <div className="App">
@@ -70,6 +73,7 @@ function UploadInfo({onGoHome}) {
       <img src={logo} alt="Truthflow Logo" width="72" height="72"></img>
         Truthflow</h1>
       <FactChecker />
+      
     </div>
   )
 }
