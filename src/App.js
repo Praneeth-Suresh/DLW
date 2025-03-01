@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 import InputBox from './Components/InputBox';
@@ -48,6 +48,8 @@ function HomePage({setClick, setURL}) {
               Welcome to <code>Truthflow</code>.
           </h2>
           <p>How can we help you today.</p>
+          <p>A service for identifying fake content and news on social media (insta for now)</p>
+          <p> Paste URL or Upload PDF of the news post/article </p>
               
           <InputBox 
             setClick={ setClick }
