@@ -95,14 +95,9 @@ const FactChecker = () => {
     const fetchContent = async () => {
       setIsLoading(true);
       try {
-        // Sample text that will be fact-checked
-        const sampleText =
-          "The Earth is the third planet from the Sun. The Moon is made of cheese. " +
-          "Water boils at 100 degrees Celsius at sea level. The Great Wall of China is visible from space. " +
-          "Humans have 5 senses. The capital of France is Paris.";
-
         await CheckFactualAccuracy(setData); // This updates the state
-        console.log("The data from Django has been retrieved: ", data); // Logging the state data
+        console.log("The data (1) from Django has been retrieved: ", data); // Logging the state data
+        data.map((fact) => console.log(fact.text));
         setContent(data); // Set the content after data is fetched
       } catch (error) {
         console.error("Error fetching content:", error);
