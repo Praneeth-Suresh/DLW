@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import PostData from './PostData';
 
-function InputBox({ setClick }) {
+function InputBox({ setClick, setURL }) {
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,9 +19,11 @@ function InputBox({ setClick }) {
 
   const handleOnSubmit = () => {
     // Function to handle the submit action
+    PostData(inputValue);
     console.log(inputValue);
     console.log('Selected file:', selectedFile);
     setClick(1);
+    setURL(inputValue);
     // Reset after submit
     setInputValue('');
     setSelectedFile(null);
