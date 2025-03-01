@@ -1,0 +1,49 @@
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 20px;
+  }
+  
+  .article-table th, .article-table td {
+    border: 0px solid #dddddd39;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .article-name {
+    cursor: pointer;
+    background-color: #ffffff42;
+    transition: background-color 0.3s;
+    align-content: center;
+  }
+  
+  .article-name:hover {
+    background-color: purple;
+    color: white;
+  }
+  
+  .progress-bar {
+    display: flex;
+    height: 10px;
+    width: 100%;
+    background-color: #f3f3f360;
+    border-radius: 5px;
+    overflow: hidden;
+    align-tracks: center;
+  }
+  
+  .progress {
+    height: 100%;
+  }
+  
+  .green {
+    background-color: green;
+  }
+  
+  .red {
+    background-color: red;
+  }
+  
+  .grey {
+    background-color: grey;
+  }

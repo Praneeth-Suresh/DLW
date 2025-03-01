@@ -1,9 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import "./FactChecker.css"
 
+import DOMPurify from 'dompurify';
+
 import axios from 'axios';
+
+import Photo from './PhotoOutput.jpg';
+
+import ArticleTable from './ArticleTable';
+import ReactDOM from 'react-dom';
+
 
 
 // Simulated server action for fact-checking
@@ -17,69 +25,65 @@ const CheckFactualAccuracy = async (setData) => {
         URL: HelloMessage,
       },
     });
-    setData(response.data.message); // Update state with the received data
+    setData(response.data); // Update state with the received data
   } catch (error) {
     console.error('Error fetching data:', error);
     setData(null); // Optional: set data to null if there was an error
   }
 };
 
-//   // This is a simplified example - in a real app, you'd use an AI service
-//   // or database to check facts
-  // const factChecks = [
-  //   {
-  //     text: "The Earth is the third planet from the Sun. ",
-  //     isFactual: true,
-  //     explanation: "Correct. Earth is the third planet from the Sun in our solar system.",
-  //   },
-  //   {
-  //     text: "The Moon is made of cheese. ",
-  //     isFactual: false,
-  //     explanation: "Incorrect. The Moon is made primarily of rock, similar to Earth's mantle.",
-  //   },
-  //   {
-  //     text: "Water boils at 100 degrees Celsius at sea level. ",
-  //     isFactual: true,
-  //     explanation: "Correct. At standard atmospheric pressure (sea level), water boils at 100°C (212°F).",
-  //   },
-  //   {
-  //     text: "The Great Wall of China is visible from space. ",
-  //     isFactual: false,
-  //     explanation:
-  //       "Incorrect. The Great Wall of China is generally not visible to the naked eye from space, contrary to popular belief.",
-  //   },
-  //   {
-  //     text: "Humans have 5 senses. ",
-  //     isFactual: false,
-  //     explanation:
-  //       "Partially incorrect. While the traditional model identifies 5 basic senses, humans actually have many more, including balance, temperature, pain, and proprioception.",
-  //   },
-  //   {
-  //     text: "The capital of France is Paris.",
-  //     isFactual: true,
-  //     explanation: "Correct. Paris is indeed the capital city of France.",
-  //   },
-  // ]
-
-//   return { sections: factChecks }
-// }
 
 const HighlightedText = ({ section }) => {
+
+  const sanitizedHtmlContent = DOMPurify.sanitize(section.explanation);
+
   return (
+    <>
+    { section.fact ? (
     <span className={`highlighted-text ${section.isFactual ? "factual" : "non-factual"}`}>
       {section.text}
       <span className="tooltip" role="tooltip">
-        {section.explanation}
+        <div
+          dangerouslySetInnerHTML={{ __html: sanitizedHtmlContent }}
+        />
+      </span>
+    </span> ) :
+    (
+      <span className={`highlighted-text`}>
+      {section.text}
+      <span className="tooltip" role="tooltip">
+        We analyse only facts for you: <br></br> leaving the author to their <a href='https://medium.com/the-write-purpose/why-other-peoples-opinions-matter-f4b94b825004' target="_blank">opinions</a>.
       </span>
     </span>
+    )
+    }
+    </>
   )
 }
 
+
 const LoadingSkeleton = () => {
+  const statements = [
+    "Hang tight! Weeding out the weeds for you!",
+    "Fact-checking in action...Cultivating a more informed society!",
+    "Validating key details...Promoting responsible information sharing!",
+    "Examining expert opinions...Delivering well-rounded insights fresh to you!",
+    "Assessing contextual accuracy...Providing a comprehensive view just for you!",
+    "Evaluating source credibility...Helping you make informed decisions at the click of a button!",
+    "Scanning reliable databases...Fighting misinformation together one check at a time!",
+    "Cross-referencing data...Enhancing your news literacy for a better informed you!",
+    "Analyzing multiple perspectives...Bringing you nothing but the truth!",
+    "Comparing with trusted sources... Separating fact from fiction!"
+  ];
+
+  const randomIndex = Math.floor(Math.random() * statements.length);
+  const loaderQuote = statements[randomIndex];
+
   return (
     <div className="skeleton-container">
       <div className="skeleton"></div>
       <div className="skeleton"></div>
+      <div className="skeleton">{loaderQuote}</div>
       <div className="skeleton"></div>
       <div className="skeleton" style={{ width: "80%" }}></div>
     </div>
@@ -97,6 +101,7 @@ const FactChecker = () => {
       try {
         await CheckFactualAccuracy(setData); // This updates the state
         console.log("The data (1) from Django has been retrieved: ", data); // Logging the state data
+        
         data.map((fact) => console.log(fact.text));
         setContent(data); // Set the content after data is fetched
       } catch (error) {
