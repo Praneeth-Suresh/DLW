@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PostData from './PostData';
+import "../pdfholder.css";
 
 function InputBox({ setClick, setURL }) {
   const [inputValue, setInputValue] = useState('');
@@ -42,14 +43,17 @@ function InputBox({ setClick, setURL }) {
   };
 
   const handleKeyDown = (event) => {
-    // Check if the pressed key is Enter and the input is not empty
-    if (event.key === 'Enter' && !event.shiftKey && inputValue.trim()) {
+    // Check if the pressed key is Enter and there's either text input or a file
+    if (event.key === 'Enter' && !event.shiftKey && (inputValue.trim() || selectedFile)) {
       // Prevent the default action (new line in textarea)
       event.preventDefault();
       // Trigger the submit function
       handleOnSubmit();
     }
   };
+
+  // Check if submission is allowed (either text input or file upload)
+  const isSubmissionAllowed = inputValue.trim() || selectedFile;
 
   return (
     <div style={{ 
@@ -131,14 +135,14 @@ function InputBox({ setClick, setURL }) {
           {/* Submit button */}
           <button
             onClick={handleOnSubmit}
-            disabled={!inputValue.trim()}
+            disabled={!isSubmissionAllowed}
             style={{
-              background: inputValue.trim() ? '#6E41E2' : '#36454F',
+              background: isSubmissionAllowed ? '#6E41E2' : '#36454F',
               color: 'white',
               border: 'none',
               borderRadius: '6px',
               padding: '6px 12px',
-              cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
+              cursor: isSubmissionAllowed ? 'pointer' : 'not-allowed',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -153,12 +157,12 @@ function InputBox({ setClick, setURL }) {
         </div>
       </div>
 
-      {/* File preview (optional) */}
+      {/* File preview */}
       {selectedFile && (
         <div style={{
           marginTop: '8px',
           padding: '8px 12px',
-          backgroundColor: '#F3F4F6',
+          backgroundColor: '#BAC1D0',
           borderRadius: '8px',
           fontSize: '14px',
           display: 'flex',
@@ -166,17 +170,17 @@ function InputBox({ setClick, setURL }) {
           gap: '8px'
         }}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.50016 14.1667H12.5002M7.50016 11.6667H12.5002M13.3335 17.5H6.66683C5.28611 17.5 4.16683 16.3807 4.16683 15V5.00001C4.16683 3.6193 5.28611 2.50001 6.66683 2.50001H10.5835L15.8335 7.75001V15C15.8335 16.3807 14.7142 17.5 13.3335 17.5Z" 
+            <path d="M7.50016 14.1667H12.5002M7.50016 11.6667H12.5002M13.3335 17.5H6.66683C5.28611 17.5 4.16683 16.3807 4.16683 15V5.00001C4.16683 3.6193 5.28611 2.50001 6.66683 2.50001H10.5835L15.8335 7.75001V15C15.8335 17.5 14.7142 17.5 13.3335 17.5Z" 
                   stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-          <span>{selectedFile.name}</span>
+          <span className="blacktext">{selectedFile.name}</span>
           <button 
             onClick={() => setSelectedFile(null)}
             style={{
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: '#6B7280',
+              color: '#D5DDED',
               marginLeft: 'auto'
             }}
           >

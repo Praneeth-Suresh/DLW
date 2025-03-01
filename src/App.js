@@ -48,7 +48,7 @@ function HomePage({setClick, setURL}) {
               Welcome to <code>Truthflow</code>.
           </h2>
           <p>How can we help you today.</p>
-          <p>A service for identifying fake content and news on social media (insta for now)</p>
+          <p>A service for identifying fake content and news on social media (instagram for now)</p>
           <p> Paste URL or Upload PDF of the news post/article </p>
               
           <InputBox 
